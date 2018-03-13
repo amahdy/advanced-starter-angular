@@ -1,0 +1,8 @@
+.card {
+  width: 70%;
+  margin: var(--lumo-space-m);
+  padding: var(--lumo-space-m);
+  border-radius: var(--lumo-border-radius);
+  background-color: var(--lumo-base-color);
+  box-shadow: var(--lumo-box-shadow-s);
+}
