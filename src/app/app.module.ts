@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { PolymerModule } from '@codebakery/origami';
@@ -11,7 +12,8 @@ import { PolymerModule } from '@codebakery/origami';
   ],
   imports: [
     PolymerModule.forRoot(),
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

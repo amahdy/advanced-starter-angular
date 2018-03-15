@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +15,19 @@ export class AppComponent {
   formSubmittedOpen = false;
   formInvalidOpen = false;
 
-  _handleResponse(event) {
-    this.users=event.detail.response.result;
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.http
+      .get('https://demo.vaadin.com/demo-data/1.0/people?count=200')
+      .subscribe(
+        (users: any) => {
+          this.users = users.result;
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   selectedPageChange(page) {

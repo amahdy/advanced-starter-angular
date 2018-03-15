@@ -1,11 +1,3 @@
-<!-- Fetch an array of users to be shown in the grid -->
-<iron-ajax
-  auto
-  url="https://demo.vaadin.com/demo-data/1.0/people?count=200"
-  handle-as="json"
-  (response)="_handleResponse($event)">
-</iron-ajax>
-
 <vaadin-tabs id="tabs" [selected]="selectedPage" (click)="selectedPageChange()">
   <vaadin-tab>All Contacts</vaadin-tab>
   <vaadin-tab>Add New</vaadin-tab>

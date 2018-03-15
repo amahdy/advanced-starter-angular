@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script src="assets/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-  <link rel="import" href="assets/bower_components/iron-ajax/iron-ajax.html">
   <link rel="import" href="assets/bower_components/iron-form/iron-form.html">
   <link rel="import" href="assets/bower_components/iron-pages/iron-pages.html">
 
@@ -36,7 +35,11 @@
   <link rel="import" href="assets/bower_components/vaadin-lumo-styles/typography.html">
 
   <custom-style>
-    <style include="lumo-color lumo-typography"></style>
+    <style include="lumo-color lumo-typography">
+      html {
+        background-color: hsla(214, 57%, 24%, 0.1);
+      }
+    </style>
   </custom-style>
 </head>
 <body>
