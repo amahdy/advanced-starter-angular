@@ -9,7 +9,7 @@
 <iron-pages [selected]="selectedPage">
 
 <div class="card">
-<vaadin-grid id="grid" [items]="users">
+<vaadin-grid #grid [items]="users">
 
   <vaadin-grid-column width="60px" flex-grow="0">
     <template class="header">#</template>
@@ -45,18 +45,17 @@
 </div>
 
 <div class="card">
-<iron-form id="form">
-  <form>
+  <form #form="ngForm">
     <vaadin-form-layout>
 
       <vaadin-form-item>
         <label slot="label">First Name</label>
-        <vaadin-text-field id="fnField" required error-message="Please enter first name" class="full-width"></vaadin-text-field>
+        <vaadin-text-field [(ngModel)]="fnField" name="fnField" ngDefaultControl required error-message="Please enter first name" class="full-width"></vaadin-text-field>
       </vaadin-form-item>
 
       <vaadin-form-item>
         <label slot="label">Last Name</label>
-        <vaadin-text-field id="lnField" required error-message="Please enter last name" class="full-width"></vaadin-text-field>
+        <vaadin-text-field [(ngModel)]="lnField" name="lnField" ngDefaultControl required error-message="Please enter last name" class="full-width"></vaadin-text-field>
       </vaadin-form-item>
 
       <vaadin-form-item>
@@ -79,12 +78,11 @@
       </vaadin-form-item>
 
       <vaadin-form-item colspan="2">
-        <vaadin-button (click)="submitForm()">Submit</vaadin-button>
+        <vaadin-button (click)="submitForm(form)">Submit</vaadin-button>
       </vaadin-form-item>
 
     </vaadin-form-layout>
   </form>
-</iron-form>
 </div>
 
 </iron-pages>

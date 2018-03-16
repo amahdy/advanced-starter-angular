@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -8,12 +8,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
 
+  @ViewChild('grid') grid: ElementRef;
+
   users = {};
   langauges = ["Dutch", "English", "French"];
   selectedPage = 0;
   dialogOpen = false;
   formSubmittedOpen = false;
   formInvalidOpen = false;
+  fnField: string = "";
+  lnField: string = "";
 
   constructor(private http: HttpClient) {}
 
@@ -38,19 +42,16 @@ export class AppComponent {
     this.dialogOpen = !this.dialogOpen;
   }
 
-  submitForm(event) {
-    let form: any = document.getElementById("form");
-    if (form.validate()) {
+  submitForm(form) {
+    if (form.valid) {
       this.formSubmittedOpen = true;
-      let grid: any = document.getElementById("grid"),
-          fn: any = document.getElementById('fnField'),
-          ln: any = document.getElementById('lnField');
+      let grid: any = this.grid.nativeElement;
       grid.items.unshift({
-        firstName:fn.value,
-        lastName:ln.value
+        firstName: this.fnField,
+        lastName: this.lnField
       });
-      fn.value = '';
-      ln.value = '';
+      this.fnField = '';
+      this.lnField = '';
       grid.selectedItems = [];
       grid.clearCache();
       grid.selectItem(grid.items[0])
