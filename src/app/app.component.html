@@ -1,4 +1,7 @@
-<vaadin-tabs id="tabs" [selected]="selectedPage" (click)="selectedPageChange()">
+<vaadin-tabs
+  id="tabs"
+  [selected]="selectedPage"
+  (selected-changed)="selectedPage=$event.detail.value">
   <vaadin-tab>All Contacts</vaadin-tab>
   <vaadin-tab>Add New</vaadin-tab>
 </vaadin-tabs>
