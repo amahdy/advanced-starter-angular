@@ -43,7 +43,7 @@ We will use some extra elements, so update dependencies first, in `bower.json` a
 Then install those new dependencies:
 
 ```bash
-$ bower install
+  $ bower install
 ```
 
 If the app was running then a restart is required at this point.
