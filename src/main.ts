@@ -10,10 +10,13 @@ if (environment.production) {
   enableProdMode();
 }
 
-webcomponentsReady().then(() => {
-  platformBrowserDynamic().bootstrapModule(AppModule)
-    .catch(err => console.log(err));
-}).catch(error => {
-  // No WebComponent support and webcomponentsjs is not loaded
-  console.error(error);
-});
+webcomponentsReady()
+  .then(() => {
+    platformBrowserDynamic()
+      .bootstrapModule(AppModule)
+      .catch(err => console.log(err));
+  })
+  .catch(error => {
+    // No WebComponent support and webcomponentsjs is not loaded
+    console.error(error);
+  });

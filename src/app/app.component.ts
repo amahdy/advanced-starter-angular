@@ -1,23 +1,22 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Person } from './person';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  users: Person[] = [];
+  selectedUsers: Person[] = [];
+  newUser: Person = new Person();
 
-  @ViewChild('grid') grid: ElementRef;
-
-  users = {};
-  langauges = ["Dutch", "English", "French"];
+  langauges = ['Dutch', 'English', 'French'];
   selectedPage = 0;
   dialogOpen = false;
   formSubmittedOpen = false;
   formInvalidOpen = false;
-  fnField: string = "";
-  lnField: string = "";
 
   constructor(private http: HttpClient) {}
 
@@ -41,17 +40,11 @@ export class AppComponent {
   submitForm(form) {
     if (form.valid) {
       this.formSubmittedOpen = true;
-      let grid: any = this.grid.nativeElement;
-      grid.items.unshift({
-        firstName: this.fnField,
-        lastName: this.lnField
-      });
-      this.fnField = '';
-      this.lnField = '';
-      grid.selectedItems = [];
-      grid.clearCache();
-      grid.selectItem(grid.items[0])
-      this.selectedPage=0; // Go back
+
+      this.users = [this.newUser, ...this.users];
+      this.selectedUsers = [this.newUser];
+      this.newUser = new Person();
+      this.selectedPage = 0; // Go back
     } else {
       this.formInvalidOpen = true;
     }
