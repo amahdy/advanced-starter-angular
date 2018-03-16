@@ -34,10 +34,6 @@ export class AppComponent {
       );
   }
 
-  selectedPageChange(page) {
-    this.selectedPage ^= 1;
-  }
-
   toggleDialog() {
     this.dialogOpen = !this.dialogOpen;
   }
