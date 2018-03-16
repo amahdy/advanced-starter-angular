@@ -36,7 +36,9 @@ This project will continue on the [simple starter app](https://vaadin.com/start/
 
 We will use some extra elements, so update dependencies first, in `bower.json` and in the `dependencies` section:
 
-    "iron-pages": "PolymerElements/iron-pages#^2.0.0",
+```json
+  "iron-pages": "PolymerElements/iron-pages#^2.0.0",
+```
 
 Then install those new dependencies:
 
@@ -89,42 +91,42 @@ We will also make a slight change in the main app style, in `index.html` as well
 And a component specific style with few `lumo` theme variables, in `src/app/app.component.css` add:
 
 ```css
-.card {
-  width: 70%;
-  margin: var(--lumo-space-m);
-  padding: var(--lumo-space-m);
-  border-radius: var(--lumo-border-radius);
-  background-color: var(--lumo-base-color);
-  box-shadow: var(--lumo-box-shadow-s);
-}
+  .card {
+    width: 70%;
+    margin: var(--lumo-space-m);
+    padding: var(--lumo-space-m);
+    border-radius: var(--lumo-border-radius);
+    background-color: var(--lumo-base-color);
+    box-shadow: var(--lumo-box-shadow-s);
+  }
 ```
 
 Now inside `src/app/app.component.html` we will construct the html responsible about rendering the app. Delete the file content then add:
 A tabbed component to display two tabs:
 
 ```html
-<vaadin-tabs
-  id="tabs"
-  [selected]="selectedPage"
-  (selected-changed)="selectedPage=$event.detail.value">
-  <vaadin-tab>All Contacts</vaadin-tab>
-  <vaadin-tab>Add New</vaadin-tab>
-</vaadin-tabs>
+  <vaadin-tabs
+    id="tabs"
+    [selected]="selectedPage"
+    (selected-changed)="selectedPage=$event.detail.value">
+    <vaadin-tab>All Contacts</vaadin-tab>
+    <vaadin-tab>Add New</vaadin-tab>
+  </vaadin-tabs>
 ```
 
 A component to render multiple pages for tabs:
 
 ```html
-<iron-pages [selected]="selectedPage">
+  <iron-pages [selected]="selectedPage">
 
-<div class="card">
-…
-</div>
-<div class="card">
-…
-</div>
+  <div class="card">
+  …
+  </div>
+  <div class="card">
+  …
+  </div>
 
-</iron-pages>
+  </iron-pages>
 ```
 
 Here we note that the `selected` page is associated with the same variable as `vaadin-tabs`, so changing `selectedPage` value is enough to change the page.
@@ -133,39 +135,39 @@ We have two `div` holding cards, those are going to be the two pages of our comp
 A grid to hold the data:
 
 ```html
-<vaadin-grid #grid [items]="users">
+  <vaadin-grid #grid [items]="users">
 
-  <vaadin-grid-column width="60px" flex-grow="0">
-    <template class="header">#</template>
-    <template ngNonBindable>{{index}}</template>
-  </vaadin-grid-column>
+    <vaadin-grid-column width="60px" flex-grow="0">
+      <template class="header">#</template>
+      <template ngNonBindable>{{index}}</template>
+    </vaadin-grid-column>
 
-  <vaadin-grid-column>
-    <template class="header" ngNonBindable>
-      <vaadin-grid-filter aria-label="First Name" path="firstName" value="{{_filterFirstName}}">
-        <vaadin-text-field slot="filter" placeholder="First Name" value="{{_filterFirstName}}" focus-target></vaadin-text-field>
-      </vaadin-grid-filter>
-    </template>
-    <template ngNonBindable>{{item.firstName}}</template>
-  </vaadin-grid-column>
+    <vaadin-grid-column>
+      <template class="header" ngNonBindable>
+        <vaadin-grid-filter aria-label="First Name" path="firstName" value="{{_filterFirstName}}">
+          <vaadin-text-field slot="filter" placeholder="First Name" value="{{_filterFirstName}}" focus-target></vaadin-text-field>
+        </vaadin-grid-filter>
+      </template>
+      <template ngNonBindable>{{item.firstName}}</template>
+    </vaadin-grid-column>
 
-  <vaadin-grid-column>
-    <template class="header" ngNonBindable>
-      <vaadin-grid-filter aria-label="Last Name" path="lastName" value="[[_filterLastName]]">
-        <vaadin-text-field slot="filter" placeholder="Last Name" value="{{_filterLastName}}" focus-target></vaadin-text-field>
-      </vaadin-grid-filter>
-    </template>
-    <template ngNonBindable>{{item.lastName}}</template>
-  </vaadin-grid-column>
+    <vaadin-grid-column>
+      <template class="header" ngNonBindable>
+        <vaadin-grid-filter aria-label="Last Name" path="lastName" value="[[_filterLastName]]">
+          <vaadin-text-field slot="filter" placeholder="Last Name" value="{{_filterLastName}}" focus-target></vaadin-text-field>
+        </vaadin-grid-filter>
+      </template>
+      <template ngNonBindable>{{item.lastName}}</template>
+    </vaadin-grid-column>
 
-  <vaadin-grid-column width="8em">
-    <template class="header">Address</template>
-    <template>
-      <div style="white-space: normal" ngNonBindable>{{item.address.street}}, {{item.address.city}}</div>
-    </template>
-  </vaadin-grid-column>
+    <vaadin-grid-column width="8em">
+      <template class="header">Address</template>
+      <template>
+        <div style="white-space: normal" ngNonBindable>{{item.address.street}}, {{item.address.city}}</div>
+      </template>
+    </vaadin-grid-column>
 
-</vaadin-grid>
+  </vaadin-grid>
 ```
 
 In some places we used `ngNonBindable` to ignore the template of inner components.
@@ -218,33 +220,33 @@ We can see some data validation, and interaction with external elements. We use 
 We also place a notification components to notify the user about the status of the data entry:
 
 ```html
-<vaadin-notification [opened]="formSubmittedOpen" duration="4000">
-  <template>
-    A new contact has been added successfully.
-  </template>
-</vaadin-notification>
+  <vaadin-notification [opened]="formSubmittedOpen" duration="4000">
+    <template>
+      A new contact has been added successfully.
+    </template>
+  </vaadin-notification>
 
-<vaadin-notification [opened]="formInvalidOpen" duration="4000">
-  <template>
-    Some fields are missing or invalid.
-  </template>
-</vaadin-notification>
+  <vaadin-notification [opened]="formInvalidOpen" duration="4000">
+    <template>
+      Some fields are missing or invalid.
+    </template>
+  </vaadin-notification>
 ```
 
 And a dialog component to pop up when clicked on the `terms and conditions` link:
 
 ```html
-<vaadin-dialog id="dialog" no-close-on-esc no-close-on-outside-click [opened]="dialogOpen">
-  <template>
-    <vaadin-vertical-layout theme="spacing">
-      <div>
-        <h1>The content of dialog</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin maximus magna et orci lacinia maximus. Fusce ut tincidunt ex. Morbi sed vehicula metus. Phasellus vel leo a elit viverra congue. Donec finibus iaculis eros vel vestibulum. Cras vehicula neque enim, eget faucibus ligula tempus vel. Integer felis nisi, sollicitudin at lectus at, bibendum vulputate risus. In ut massa et massa scelerisque viverra.</p>
-      </div>
-      <vaadin-button (click)="toggleDialog()">OK</vaadin-button>
-    </vaadin-vertical-layout>
-  </template>
-</vaadin-dialog>
+  <vaadin-dialog id="dialog" no-close-on-esc no-close-on-outside-click [opened]="dialogOpen">
+    <template>
+      <vaadin-vertical-layout theme="spacing">
+        <div>
+          <h1>The content of dialog</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin maximus magna et orci lacinia maximus. Fusce ut tincidunt ex. Morbi sed vehicula metus. Phasellus vel leo a elit viverra congue. Donec finibus iaculis eros vel vestibulum. Cras vehicula neque enim, eget faucibus ligula tempus vel. Integer felis nisi, sollicitudin at lectus at, bibendum vulputate risus. In ut massa et massa scelerisque viverra.</p>
+        </div>
+        <vaadin-button (click)="toggleDialog()">OK</vaadin-button>
+      </vaadin-vertical-layout>
+    </template>
+  </vaadin-dialog>
 ```
 
 Final part, in `src/app/app.component.ts` we will update the application logic:
@@ -286,13 +288,13 @@ This section will populate the grid with data once the remote response is receiv
 We will need one more import as well for http:
 
 ```ts
-import { HttpClient } from '@angular/common/http';
+  import { HttpClient } from '@angular/common/http';
 ```
 
 And we need to import `HttpClientModule` in `src/app/app.module.ts` as following:
 
 ```ts
-import { HttpClientModule } from '@angular/common/http';
+  import { HttpClientModule } from '@angular/common/http';
 ```
 
 And update imports:
@@ -345,7 +347,7 @@ But to be able to use forms, we need again few imports:
 And also some other imports in `src/app/app.module.ts` as follwoing:
 
 ```ts
-import { FormsModule }   from '@angular/forms';
+  import { FormsModule }   from '@angular/forms';
 ```
 
 And
