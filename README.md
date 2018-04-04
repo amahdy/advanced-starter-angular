@@ -101,6 +101,38 @@ And a component specific style with few `lumo` theme variables, in `src/app/app.
   }
 ```
 
+Let's also create some data types to be used by the application:
+
+Create `src/app/address.ts` as following:
+
+```ts
+  export class Address {
+    constructor(
+      public street: string = '',
+      public city: string = '',
+      public state: string = '',
+      public zip: string = '',
+      public country: string = '',
+      public phone: string = ''
+    ) {}
+  }
+```
+
+And create `src/app/person.ts` as:
+
+```ts
+  import { Address } from './address';
+
+  export class Person {
+    constructor(
+      public firstName: string = '',
+      public lastName: string = '',
+      public adress: Address = new Address(),
+      public email: string = ''
+    ) {}
+  }
+```
+
 Now inside `src/app/app.component.html` we will construct the html responsible about rendering the app. Delete the file content then add:
 A tabbed component to display two tabs:
 
@@ -135,7 +167,7 @@ We have two `div` holding cards, those are going to be the two pages of our comp
 A grid to hold the data:
 
 ```html
-  <vaadin-grid #grid [items]="users">
+  <vaadin-grid #grid [items]="users" [selectedItems]="selectedUsers">
 
     <vaadin-grid-column width="60px" flex-grow="0">
       <template class="header">#</template>
@@ -251,19 +283,37 @@ And a dialog component to pop up when clicked on the `terms and conditions` link
 
 Final part, in `src/app/app.component.ts` we will update the application logic:
 
+Make the component imlement `OnInit` by first import it:
+
+```ts
+  import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+```
+
+Then update the definiton:
+
+```ts
+  export class AppComponent implements OnInit {
+```
+
+Import the newly created `Person`:
+
+```ts
+  import { Person } from './person';
+```
+
 First define few variables:
 
 ```ts
   @ViewChild('grid') grid: ElementRef;
 
-  users = {};
+  users: Person[] = [];
+  selectedUsers: Person[] = [];
+  newUser: Person = new Person();
   langauges = ["Dutch", "English", "French"];
   selectedPage = 0;
   dialogOpen = false;
   formSubmittedOpen = false;
   formInvalidOpen = false;
-  fnField: string = "";
-  lnField: string = "";
 ```
 
 This section will populate the grid with data once the remote response is received:
@@ -321,17 +371,10 @@ And this function will process the form submission. First make sure that it’s 
   submitForm(form) {
     if (form.valid) {
       this.formSubmittedOpen = true;
-      let grid: any = this.grid.nativeElement;
-      grid.items.unshift({
-        firstName: this.fnField,
-        lastName: this.lnField
-      });
-      this.fnField = '';
-      this.lnField = '';
-      grid.selectedItems = [];
-      grid.clearCache();
-      grid.selectItem(grid.items[0])
-      this.selectedPage=0; // Go back
+      this.users = [this.newUser, ...this.users];
+      this.selectedUsers = [this.newUser];
+      this.newUser = new Person();
+      this.selectedPage = 0; // Go back
     } else {
       this.formInvalidOpen = true;
     }
