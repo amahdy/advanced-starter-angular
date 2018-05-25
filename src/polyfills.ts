@@ -64,4 +64,4 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
-import '@webcomponents/webcomponentsjs/bundles/webcomponents-sd-ce.js';
+import '@webcomponents/webcomponentsjs/webcomponents-loader.js';
