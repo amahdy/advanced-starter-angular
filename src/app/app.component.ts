@@ -1,7 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import '@polymer/iron-pages';
-import '@polymer/iron-form';
 import '@vaadin/vaadin-core';
 import { Person } from './person';
 

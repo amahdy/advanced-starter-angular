@@ -9,7 +9,6 @@ We will use some extra vaadin components, we can install them using:
 
 ```bash
   yarn add @polymer/iron-pages
-  yarn add @polymer/iron-form
   yarn add @vaadin/vaadin-core
 ```
 
@@ -17,7 +16,6 @@ Now we need to include all new dependencies, in `src/app/app.component.ts` add t
 
 ```ts
   import '@polymer/iron-pages';
-  import '@polymer/iron-form';
   import '@vaadin/vaadin-core';
 ```
 
