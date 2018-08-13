@@ -1,9 +1,8 @@
-# Base Starter for Vaadin components with Angular
+# Vaadin components with Angular
 
-## Instructions
+> NOTE: This project will continue on the [Vaadin with Angular Starter App](https://vaadin.com/start/v10-angular). Please download the starter before reading this tutorial.
 
-## Recreating this project
-This project will continue on the [simple starter app](https://vaadin.com/start/v10-angular) made by Vaadin.
+### Instructions
 
 We will use some extra vaadin components, we can install them using:
 
